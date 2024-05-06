@@ -24,6 +24,7 @@ func main() {
 	defer newStore.MongoClient.Disconnect(myContext)
 	classCollection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.CLASS_COLLECTION)
 	spellCollection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.SPELL_COLLECTION)
+	raceCollection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.RACE_COLLECTION)
 
 	classRepo := impl.NewClassRepository(classCollection)
 	classService := impl2.NewClassService(classRepo)
@@ -33,6 +34,10 @@ func main() {
 	spellService := impl2.NewSpellService(spellRepo)
 	spellController := controller.NewSpellController(spellService)
 
-	server := api.NewServer([]api.Controller{classController, spellController})
+	raceRepo := impl.NewRaceRepository(raceCollection)
+	raceService := impl2.NewRaceService(raceRepo)
+	raceController := controller.NewRaceController(raceService)
+
+	server := api.NewServer([]api.Controller{classController, spellController, raceController})
 	server.HandleRequests()
 }

@@ -14,6 +14,7 @@ type MongoDb struct {
 	DB               string `env:"DB"`
 	CLASS_COLLECTION string `env:"CLASS_COLLECTION"`
 	SPELL_COLLECTION string `env:"SPELL_COLLECTION"`
+	RACE_COLLECTION  string `env:"RACE_COLLECTION"`
 }
 
 func NewFromEnv() (*Config, error) {
