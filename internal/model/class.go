@@ -12,19 +12,19 @@ type Class struct {
 	GoldEquipEcvl string      `bson:"gold_equip_ecvl"`
 	Features      []feature   `bson:"features"`
 
-	KnownCantrips     *[]int        `bson:"known_cantrips"`
-	KnownSpells       *[]int        `bson:"known_spells"`
-	KnownInvocation   *[]int        `bson:"known_invocation"`
-	Invocations       *[]invocation `bson:"invocations"`
-	Rage              *[]string     `bson:"rage"`
-	MartialArts       *[]string     `bson:"martial_arts"`
-	Ci                *[]int        `bson:"ci"`
-	SpeedWithoutArmor *[]string     `bson:"speed_without_armor"`
-	SneakAttack       *[]string     `bson:"sneak_attack"`
-	SorceryPoints     *[]int        `bson:"sorcery_points"`
-	Metamagics        *[]metamagic  `bson:"metamagic"`
-	SpellSlots        *[]int        `bson:"spell_slots"`
-	SpellSlotsLevel   *[]int        `bson:"spell_slots_level"`
+	KnownCantrips     *[]int        `bson:"known_cantrips,omitempty" json:"known_cantrips,omitempty"`
+	KnownSpells       *[]int        `bson:"known_spells,omitempty" json:"known_spells,omitempty"`
+	KnownInvocation   *[]int        `bson:"known_invocation,omitempty" json:"known_invocation,omitempty"`
+	Invocations       *[]invocation `bson:"invocations,omitempty" json:"invocations,omitempty"`
+	Rage              *[]string     `bson:"rage,omitempty" json:"rage,omitempty"`
+	MartialArts       *[]string     `bson:"martial_arts,omitempty" json:"martial_arts,omitempty"`
+	Ci                *[]int        `bson:"ci,omitempty" json:"ci,omitempty"`
+	SpeedWithoutArmor *[]string     `bson:"speed_without_armor,omitempty" json:"speed_without_armor,omitempty"`
+	SneakAttack       *[]string     `bson:"sneak_attack,omitempty" json:"sneak_attack,omitempty"`
+	SorceryPoints     *[]int        `bson:"sorcery_points,omitempty" json:"sorcery_points,omitempty"`
+	Metamagics        *[]metamagic  `bson:"metamagic,omitempty" json:"metamagic,omitempty"`
+	SpellSlots        *[]int        `bson:"spell_slots,omitempty" json:"spell_slots,omitempty"`
+	SpellSlotsLevel   *[]int        `bson:"spell_slots_level,omitempty" json:"spell_slots_level,omitempty"`
 
 	IsSpellcaster   bool `bson:"is_spellcaster"`
 	IsFullCaster    bool `bson:"is_full_caster"`
@@ -36,8 +36,8 @@ type proficiency struct {
 	Armor        []string `bson:"armor"`
 	Weapon       []string `bson:"weapon"`
 	Tools        []choice `bson:"tools"`
-	SavingThrows []string `json:"saving_throws"`
-	Skills       skills   `json:"skills"`
+	SavingThrows []string `bson:"saving_throws"`
+	Skills       skills   `bson:"skills"`
 	Equipment    []choice `bson:"equipment"`
 }
 
@@ -61,8 +61,8 @@ type feature struct {
 
 type invocation struct {
 	Name         string `bson:"name"`
-	Requirements string `json:"requirements"`
-	Description  string `json:"description"`
+	Requirements string `bson:"requirements"`
+	Description  string `bson:"description"`
 }
 
 type metamagic struct {

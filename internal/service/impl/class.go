@@ -2,7 +2,6 @@ package impl
 
 import (
 	"context"
-	"dttg/internal/model"
 	"dttg/internal/repository"
 )
 
@@ -14,10 +13,10 @@ func NewClassService(repo repository.Repository) *ClassService {
 	return &ClassService{repo: repo}
 }
 
-func (bs ClassService) GetByClassName(ctx context.Context, ID string) (*model.Class, error) {
-	return bs.repo.GetByName(ctx, ID)
+func (bs ClassService) GetByNameServ(ctx context.Context, Name string) (*interface{}, error) {
+	return bs.repo.GetByName(ctx, Name)
 }
 
-func (bs ClassService) GetAllClasses(ctx context.Context) ([]model.Class, error) {
+func (bs ClassService) GetAllServ(ctx context.Context) ([]interface{}, error) {
 	return bs.repo.GetAll(ctx)
 }

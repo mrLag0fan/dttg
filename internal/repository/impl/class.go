@@ -19,7 +19,7 @@ func NewClassRepository(collection *mongo.Collection) *ClassRepository {
 	}
 }
 
-func (repo *ClassRepository) GetByName(ctx context.Context, name string) (*model.Class, error) {
+func (repo *ClassRepository) GetByName(ctx context.Context, name string) (*interface{}, error) {
 	name = strings.Title(strings.ToLower(name))
 	filter := bson.D{{"eng_name", name}}
 	result := repo.collection.FindOne(ctx, filter)
@@ -33,16 +33,17 @@ func (repo *ClassRepository) GetByName(ctx context.Context, name string) (*model
 		return nil, err
 	}
 
-	return &class, nil
+	var obj interface{} = class
+	return &obj, nil
 }
-func (repo *ClassRepository) GetAll(ctx context.Context) ([]model.Class, error) {
+func (repo *ClassRepository) GetAll(ctx context.Context) ([]interface{}, error) {
 	cursor, err := repo.collection.Find(ctx, bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Читання результатів
-	var classes []model.Class
+	var classes []interface{}
 	for cursor.Next(context.TODO()) {
 		var result model.Class
 		err := cursor.Decode(&result)

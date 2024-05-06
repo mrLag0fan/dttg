@@ -22,12 +22,17 @@ func main() {
 		log.Fatalf("Can`t create store: %v", err)
 	}
 	defer newStore.MongoClient.Disconnect(myContext)
-	collection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.COLLECTION)
+	classCollection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.CLASS_COLLECTION)
+	spellCollection := newStore.MongoClient.Database(cfg.MongoDb.DB).Collection(cfg.MongoDb.SPELL_COLLECTION)
 
-	classRepo := impl.NewClassRepository(collection)
+	classRepo := impl.NewClassRepository(classCollection)
 	classService := impl2.NewClassService(classRepo)
 	classController := controller.NewClassController(classService)
 
-	server := api.NewServer([]api.Controller{classController})
+	spellRepo := impl.NewSpellRepository(spellCollection)
+	spellService := impl2.NewSpellService(spellRepo)
+	spellController := controller.NewSpellController(spellService)
+
+	server := api.NewServer([]api.Controller{classController, spellController})
 	server.HandleRequests()
 }

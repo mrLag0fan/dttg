@@ -22,7 +22,7 @@ func NewClassController(s service.Service) *ClassController {
 func (ac *ClassController) GetAll(w http.ResponseWriter, _ *http.Request) {
 	ctx := context.Background()
 	w.Header().Set("Content-Type", "application/json")
-	res, err := ac.service.GetAllClasses(ctx)
+	res, err := ac.service.GetAllServ(ctx)
 	api.ErrorResponse(&w, err)
 	err = json.NewEncoder(w).Encode(res)
 	api.ErrorResponse(&w, err)
@@ -34,7 +34,7 @@ func (ac *ClassController) Get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	id := vars["name"]
-	res, err := ac.service.GetByClassName(ctx, id)
+	res, err := ac.service.GetByNameServ(ctx, id)
 	api.ErrorResponse(&w, err)
 	err = json.NewEncoder(w).Encode(res)
 	api.ErrorResponse(&w, err)

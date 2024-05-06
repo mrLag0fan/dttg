@@ -9,10 +9,11 @@ type Config struct {
 }
 
 type MongoDb struct {
-	HOST       string `env:"HOST"`
-	PORT       string `env:"PORT"`
-	DB         string `env:"DB"`
-	COLLECTION string `env:"COLLECTION"`
+	HOST             string `env:"HOST"`
+	PORT             string `env:"PORT"`
+	DB               string `env:"DB"`
+	CLASS_COLLECTION string `env:"CLASS_COLLECTION"`
+	SPELL_COLLECTION string `env:"SPELL_COLLECTION"`
 }
 
 func NewFromEnv() (*Config, error) {
